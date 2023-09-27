@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        /* Your existing styles remain unchanged */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-size: 24px;
+        }
+
+        /* Increase font size in text areas */
+        textarea {
+            font-size: 28px;
+            text-align: center;
+            /* Center the text horizontally */
+            display: center;
+            /* Center the text vertically */
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Rest of your existing styles */
+
+        .text-field-container {
+            /* Updated styles for side-by-side layout */
+            display: flex;
+            flex-direction: row;
+            /* Display text areas side by side */
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .button-container {
+            /* Updated styles for buttons below text areas */
+            display: flex;
+            flex-direction: row;
+            /* Display buttons in a column */
+            align-items: center;
+        }
+
+        /* Style each button individually */
+        .button-container button {
+            font-size: 24px;
+            margin: 5px;
+        }
+
+        /* Add a class for the text areas to limit their initial height */
+        .adjustable-textarea {
+            height: 250px;
+            /* Adjust this height to your preference */
+            overflow-y: hidden;
+            /* Hide vertical scrollbar */
+            resize: none;
+            /* Prevent manual resizing of the textarea */
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <!-- Wrap text areas in a container for side-by-side display -->
+        <div class="text-field-container">
+            <textarea id="myTextField1" name="myTextField1" class="adjustable-textarea"
+                readonly>{{ text }}{{ num }}</textarea>
+            <textarea id="myTextField2" name="myTextField2" class="adjustable-textarea"
+                readonly>{{ text }}{{ num }}</textarea>
+        </div>
+        <!-- Wrap buttons in a container for column display -->
+        <div class="button-container">
+            <button type="button" onclick="decrementNumber()">Decrement</button>
+            <button type="button" onclick="incrementNumber()">Increment</button>
+        </div>
+        <br>
+        
+    </form>
+
+    <script>
+        var number = parseInt("{{ num }}");
+
+        function decrementNumber() {
+            number -= 1;
+            updateTextField();
+        }
+
+        function incrementNumber() {
+            number += 1;
+            updateTextField();
+        }
+
+        function updateNumber() {
+            var newNumber = parseInt(document.getElementById('changeNumber').value);
+            if (!isNaN(newNumber)) {
+                number = newNumber;
+                updateTextField();
+            }
+        }
+
+        function updateTextField() {
+            document.getElementById('myTextField1').value = "{{ text }}" + number;
+            document.getElementById('myTextField2').value = "{{ text }}" + number;
+            adjustTextAreaHeight('myTextField1');
+            adjustTextAreaHeight('myTextField2');
+        }
+
+        function adjustTextAreaHeight(textareaId) {
+            var textarea = document.getElementById(textareaId);
+            textarea.style.height = 'auto'; // Reset height to recalculate scroll height
+            textarea.style.height = textarea.scrollHeight + 'px'; // Set height to scroll height
+        }
+    </script>
+</body>
+
+</html>
