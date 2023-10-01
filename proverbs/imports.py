@@ -57,7 +57,7 @@ if __name__ == "__main__":
     #create_proverbs(proverbs,origin=origin)
     current_dir = os.path.dirname(os.path.abspath(__file__))
     parent_dir=os.path.dirname(current_dir)
-    print(parent_dir)
+    #print(parent_dir)
     sys.path.append(parent_dir)
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sortit.settings')  # Replace 'myproject.settings' with your project's settings module
     django.setup()
